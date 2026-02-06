@@ -2,10 +2,11 @@ import argparse
 import asyncio
 import json
 import logging
+import os
 import shlex
+import socket
 import subprocess
 import sys
-import socket
 from pathlib import Path
 from typing import Any, Optional
 
@@ -207,7 +208,7 @@ async def run_webui(args: argparse.Namespace) -> None:
         port = find_available_port(8080)
     
     process = subprocess.Popen(
-        ["streamlit", "run", "src/fuzzyai/webui.py", "--server.port", str(port)],
+        ["streamlit", "run", os.path.join("src", "fuzzyai", "webui.py"), "--server.port", str(port)],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
